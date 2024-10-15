@@ -14,7 +14,7 @@ function vermas() {
                 <div class="card-body">
                     <h5 class="card-title">Card title ${i}</h5>
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <button class="btn btn-primary" onclick="location.href='./producto.html';">Ver más</button>
+                    <button class="btn btn-primary" onclick="location.href='producto.html';">Ver más</button>
                 </div>
                 <div class="card-footer">
                     <small class="text-body-secondary">Last updated 3 mins ago</small>
