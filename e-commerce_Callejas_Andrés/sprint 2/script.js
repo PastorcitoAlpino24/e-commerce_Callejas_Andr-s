@@ -10,13 +10,22 @@ const data = [
     {"id":9,"title":"Different from You and Me (Anders als du und ich) ","detail":"Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\n\nMorbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.","img":"http://dummyimage.com/237x100.png/ff4444/ffffff","price":3,"stock":60,"genres":"Drama"}
 ];
 
+const h1 = document.querySelector("h1");
 const BuscarInput = document.getElementById("BuscarInput");
 const BotonBuscar = document.getElementById("BotonBuscar");
 const BotonLimpiar = document.getElementById("BotonLimpiar");
 const BotonTodos = document.getElementById("BotonTodos");
 const BotonComedia = document.getElementById("BotonComedia");
 const BotonDrama = document.getElementById("BotonDrama");
+const BotonAction = document.getElementById("BotonAction");
+const BotonWar = document.getElementById("BotonWar");
+const BotonAdventure = document.getElementById("BotonAdventure");
+const BotonSciFi = document.getElementById("BotonSciFi");
+const BotonDocumentary = document.getElementById("BotonDocumentary");
+const BotonRomance = document.getElementById("BotonRomance");
 const section = document.querySelector("section");
+
+h1.innerText = "E-commerce";
 
 function mostrarProductos(productos) {
     const array = productos.map(producto => `
@@ -43,8 +52,8 @@ function mostrarProductos(productos) {
 mostrarProductos(data);
 
 function filtrarProductos() {
-    const minusculas = BuscarInput.value.toLowerCase();
-    const filterData = data.filter(producto => producto.title.toLowerCase().includes(minusculas));
+    const busqueda = BuscarInput.value.toLowerCase();
+    const filterData = data.filter(producto => producto.title.toLowerCase().includes(busqueda));
     mostrarProductos(filterData);
 }
 
@@ -60,13 +69,43 @@ BotonTodos.addEventListener("click", () => {
 })
 
 BotonComedia.addEventListener("click", () => {
-    const filteredComedy = data.filter(producto => producto.genres.toLowerCase().includes("comedy"));
-    mostrarProductos(filteredComedy);
-});
+    const filterComedy = data.filter(producto => producto.genres.toLowerCase().includes("comedy"));
+    mostrarProductos(filterComedy);
+})
 
 BotonDrama.addEventListener("click", () => {
-    const filteredDrama = data.filter(producto => producto.genres.toLowerCase().includes("drama"));
-    mostrarProductos(filteredDrama);
+    const filterDrama = data.filter(producto => producto.genres.toLowerCase().includes("drama"));
+    mostrarProductos(filterDrama);
+})
+
+BotonAction.addEventListener("click", () => {
+    const filterAction = data.filter(producto => producto.genres.toLowerCase().includes("action"));
+    mostrarProductos(filterAction);
+})
+
+BotonAdventure.addEventListener("click", () => {
+    const filterAdventure = data.filter(producto => producto.genres.toLowerCase().includes("adventure"));
+    mostrarProductos(filterAdventure);
+})
+
+BotonSciFi.addEventListener("click", () => {
+    const filterSciFi = data.filter(producto => producto.genres.toLowerCase().includes("sci-fi"));
+    mostrarProductos(filterSciFi);
+})
+
+BotonDocumentary.addEventListener("click", () => {
+    const filterDocumentary = data.filter(producto => producto.genres.toLowerCase().includes("documentary"));
+    mostrarProductos(filterDocumentary);
+})
+
+BotonWar.addEventListener("click", () => {
+    const filterWar = data.filter(producto => producto.genres.toLowerCase().includes("war"));
+    mostrarProductos(filterWar);
+})
+
+BotonRomance.addEventListener("click", () => {
+    const filterRomance = data.filter(producto => producto.genres.toLowerCase().includes("romance"));
+    mostrarProductos(filterRomance);
 });
 /*
 function vermas() {
