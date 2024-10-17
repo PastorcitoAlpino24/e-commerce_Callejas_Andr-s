@@ -60,12 +60,12 @@ BotonTodos.addEventListener("click", () => {
 })
 
 BotonComedia.addEventListener("click", () => {
-    const filteredComedy = data.filter(producto => producto.genres.toLowerCase().includes("comedy"));
+    const filteredComedy = data.filter(producto => producto.genres==="Comedy");
     mostrarProductos(filteredComedy);
 });
 
 BotonDrama.addEventListener("click", () => {
-    const filteredDrama = data.filter(producto => producto.genres.toLowerCase().includes("drama"));
+    const filteredDrama = data.filter(producto => producto.genres==="Drama");
     mostrarProductos(filteredDrama);
 });
 
