@@ -60,15 +60,14 @@ BotonTodos.addEventListener("click", () => {
 })
 
 BotonComedia.addEventListener("click", () => {
-    const filteredComedy = data.filter(producto => producto.genres==="Comedy");
+    const filteredComedy = data.filter(producto => producto.genres.toLowerCase().includes("comedy"));
     mostrarProductos(filteredComedy);
 });
 
 BotonDrama.addEventListener("click", () => {
-    const filteredDrama = data.filter(producto => producto.genres==="Drama");
+    const filteredDrama = data.filter(producto => producto.genres.toLowerCase().includes("drama"));
     mostrarProductos(filteredDrama);
 });
-
 /*
 function vermas() {
     const h1 = document.querySelector("h1");
