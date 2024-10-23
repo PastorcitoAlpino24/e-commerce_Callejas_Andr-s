@@ -21,3 +21,12 @@ form.addEventListener ("submit",  (event) => {
         form.elements.email.value = "";
     }
 });
+
+//logged 
+const isAuthRedirectHome = ()  => {
+    if (localStorage.getItem("email")) {
+        location.href = "./index.html"
+    }
+};
+
+isAuthRedirectHome();
