@@ -5,7 +5,7 @@ const sessionAccount = {
 
 const form = document.querySelector("form");
 
-// console.dir(form.elements.Email);
+// console.dir(form.elements.email);
 
 form.addEventListener ("submit",  (event) => {
     event.preventDefault();

@@ -285,3 +285,21 @@ body {
 .primary-btn:hover, .secondary-btn:hover {
     opacity: 0.9;
 }
+
+.navbar {
+    font-family: 'Cinephile', sans-serif;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    color: #ffc107 !important; 
+}
+
+.nav-link:hover {
+    color: #ffc107 !important; 
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); 
+}
+
+.navbar-toggler-icon {
+    background-image: url('path_to_hamburger_icon.png'); 
+}
