@@ -1,0 +1,53 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('https://www.example.com/cinema-background.jpg') no-repeat center center/cover;
+    background-color: #000; 
+    margin: 0;
+}
+
+form {
+    background-color: rgba(0, 0, 0, 0.8); 
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 400px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #f5c518; 
+    font-family: 'Courier New', Courier, monospace; 
+}
+
+.form-label {
+    font-weight: bold;
+    color: #f5c518;
+}
+
+.form-control {
+    background-color: #222;
+    color: #fff;
+    border-radius: 8px;
+    border: 1px solid #555;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #d32f2f;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #b71c1c;
+}
+
