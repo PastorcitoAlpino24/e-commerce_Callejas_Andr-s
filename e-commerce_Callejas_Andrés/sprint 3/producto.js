@@ -29,21 +29,63 @@ const productoFiltrado = data.find(producto => producto.id == elemento);
 
 if (productoFiltrado) {
     const etiquetasHTML = `
-        <div class="card">
-            <img src="${productoFiltrado.img}" class="card-img-top" alt="${productoFiltrado.title}">
-            <div class="card-body">
-                <h5 class="card-title">${productoFiltrado.title}</h5>
-                <p class="card-text">${productoFiltrado.detail}</p>
-                <p class="card-text"><strong>Precio:</strong> $${productoFiltrado.price}</p>
-                <p class="card-text"><strong>Stock disponible:</strong> ${productoFiltrado.stock}</p>
-            </div>
+    <div class="card">
+        <img src="${productoFiltrado.img}" class="card-img-top" alt="${productoFiltrado.title}">
+        <div class="card-body">
+            <h5 class="card-title">${productoFiltrado.title}</h5>
+            <p class="card-text">${productoFiltrado.detail}</p>
+            <p class="card-text"><strong>Precio:</strong> $${productoFiltrado.price}</p>
+            <p class="card-text"><strong>Stock disponible:</strong> ${productoFiltrado.stock}</p>
         </div>
-    `;
+    </div>
+    ${localStorage.getItem("email")
+            ? `<div class="input-group">
+                <button class="btn btn-danger" type="button" onclick="increaseItem()">+</button>
+                <input type="number" class="form-control" value="0">
+                <button class="btn btn-danger" type="button" onclick="decreaseItem()">-</button>
+                <a href="#" class="btn btn-primary col-12" onclick="addItems()">Comprar</a>
+           </div>`
+            : '<a href="login.html"><button type="button" class="btn btn-primary btn-lg">Iniciar sesión para comprar</button></a>'}
+`;
 
     const main = document.querySelector("main");
     main.innerHTML = etiquetasHTML;
-    
+
 } else {
     const main = document.querySelector("main");
     main.innerHTML = "<p>Producto no encontrado.</p>";
 }
+
+const counter = document.querySelector("input"); 
+
+    function increaseItem() {
+        const maxStock = productoFiltrado.stock; 
+        if (Number(counter.value) < maxStock) {
+            counter.value = Number(counter.value) + 1;
+        } else {
+            alert("No puedes superar el stock disponible.");
+        }
+    }
+
+
+    function decreaseItem() {
+        if (Number(counter.value) > 0) {
+            counter.value = Number(counter.value) - 1;
+        } else {
+            alert("La cantidad mínima es 1.");
+        }
+    }
+
+    function addItems() {
+        const cart = JSON.parse(localStorage.getItem("cart"));
+        const idProduct = Number(window.location.search.split("=")[1]); 
+        cart.push({ id: idProduct, quantity: counter.value });
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+    
+        let quantity = cart.reduce((acumulado, actual) => acumulado + actual.quantity, 0);
+        localStorage.setItem("quantity", quantity);
+        const quantityTag = document.querySelector("#quantity");
+    
+        quantityTag.innerText = quantity;
+    }

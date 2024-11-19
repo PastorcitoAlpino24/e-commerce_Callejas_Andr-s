@@ -40,12 +40,6 @@ function mostrarProductos(productos) {
                     <p class="card-text"><strong>Género:</strong> ${producto.genres}</p>
                     <button class="btn btn-primary" onclick="location.href='producto.html?prod=${producto.id}';">Ver más</button>
                 </div>
-                <div class="input-group">
-                    <button class="btn btn-danger" type="button" onclick="increaseItem()">+</button>
-                    <input type="number" class="form-control" value="0">
-                    <button class="btn btn-danger" type="button" onclick="decreaseItem()">-</button>
-                    <a href="#" class="btn btn-primary col-12" onclick="addItems()">Comprar</a>
-                </div>
                 <div class="card-footer">
                     <small class="text-body-secondary">Última actualización hace 3 minutos</small>
                 </div>

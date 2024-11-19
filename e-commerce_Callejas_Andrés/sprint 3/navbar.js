@@ -13,6 +13,7 @@ for (let boton of botones) {
     menu.push(`<a class="nav-link text-light mx-2" href="${boton.href}">${boton.texto}</a>`);
 }
 
+//sesión
 let navCode =
     `<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #2c2c2c; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);">
             <div class="container-fluid d-flex">
@@ -28,7 +29,7 @@ let navCode =
                     </div>
                     <div class="navbar-nav ms-auto me-3 text-light">
                         ${localStorage.getItem("email")
-        ? `<span class="text-light">${localStorage.getItem("email")}</span> | <span onclick="closeSession()" style="cursor:pointer;" class="text-warning">Cerrar sesión</span>`
+        ? `<span class="text-light">${localStorage.getItem("email")}</span> | <span onclick="closeSession()" style="cursor:pointer;" class="text-warning">Cerrar sesión</span>  <span> | </span><li><img height="25" src=".//cart.png" alt="Comprar" /><b>${localStorage.getItem( "quantity" )}</b></li><span></span>`
         : `<a href="login.html" class="text-decoration-none text-light">Iniciar sesión</a>`
     }
                     </div>

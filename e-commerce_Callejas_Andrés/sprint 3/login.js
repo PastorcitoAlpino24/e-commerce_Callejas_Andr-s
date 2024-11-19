@@ -7,7 +7,7 @@ const form = document.querySelector("form");
 
 // console.dir(form.elements.email);
 
-form.addEventListener ("submit",  (event) => {
+const handleSubmitLogin = form.addEventListener ("submit",  (event) => {
     event.preventDefault();
     let psswd = form.elements.password.value; //value = name del input
     let email = form.elements.email.value;
@@ -15,6 +15,8 @@ form.addEventListener ("submit",  (event) => {
     if (sessionAccount.email === email && sessionAccount.password === psswd){
         window.location.href = "./index.html";
         localStorage.setItem("email", email);
+        localStorage.setItem("cart", JSON.stringify([]));
+        localStorage.setItem("quantity", "0");
     } else{
         alert("Datos incorrectos");
         form.elements.password.value = "";
