@@ -107,6 +107,12 @@ BotonRomance.addEventListener("click", () => {
     const filterRomance = data.filter(producto => producto.genres.toLowerCase().includes("romance"));
     mostrarProductos(filterRomance);
 });
+
+const myPromise = new Promise((resolve) => {
+    setTimeout(() => {
+        resolve("Data loaded")}, 3000)
+});
+
 /*
 function vermas() {
     const h1 = document.querySelector("h1");

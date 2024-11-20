@@ -48,6 +48,7 @@ if (productoFiltrado) {
             : '<a href="login.html"><button type="button" class="btn btn-primary btn-lg">Iniciar sesión para comprar</button></a>'}
 `;
 
+    //arreglar
     const main = document.querySelector("main");
     main.innerHTML = etiquetasHTML;
 
@@ -56,36 +57,95 @@ if (productoFiltrado) {
     main.innerHTML = "<p>Producto no encontrado.</p>";
 }
 
-const counter = document.querySelector("input"); 
+const counter = document.querySelector("input");
 
-    function increaseItem() {
-        const maxStock = productoFiltrado.stock; 
-        if (Number(counter.value) < maxStock) {
-            counter.value = Number(counter.value) + 1;
+function increaseItem() {
+    const maxStock = productoFiltrado.stock;
+    if (Number(counter.value) < maxStock) {
+        counter.value = Number(counter.value) + 1;
+    } else {
+        alert("No puedes superar el stock disponible.");
+    }
+}
+
+
+function decreaseItem() {
+    if (Number(counter.value) > 0) {
+        counter.value = Number(counter.value) - 1;
+    } else {
+        alert("La cantidad mínima es 1.");
+    }
+}
+
+function addItems() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const idProduct = Number(window.location.search.split("=")[1]);
+    const product = data.find(item => item.id === idProduct);
+    const existItemEnCart = cart.some(item => item.product.id === idProduct);
+
+    if (existItemEnCart) {
+        cart = cart.map(item => {
+            if (item.product.id === idProduct) {
+                const newQuantity = item.quantity + Number(counter.value);
+
+                if (newQuantity > product.stock) {
+                    alert("No puedes agregar más de lo disponible en el stock.");
+                    return item;
+                }
+
+                return { ...item, quantity: newQuantity };
+            } else {
+                return item;
+            }
+        });
+    } else {
+        const quantityToAdd = Number(counter.value);
+
+        if (quantityToAdd > product.stock) {
+            alert("No puedes agregar más de lo disponible en el stock.");
         } else {
-            alert("No puedes superar el stock disponible.");
+            cart.push({
+                product: product,
+                quantity: quantityToAdd
+            });
         }
     }
 
+    localStorage.setItem("cart", JSON.stringify(cart));
 
-    function decreaseItem() {
-        if (Number(counter.value) > 0) {
-            counter.value = Number(counter.value) - 1;
-        } else {
-            alert("La cantidad mínima es 1.");
-        }
-    }
+    let quantity = cart.reduce((acumulado, actual) => acumulado + actual.quantity, 0);
+    localStorage.setItem("quantity", quantity);
 
-    function addItems() {
-        const cart = JSON.parse(localStorage.getItem("cart"));
-        const idProduct = Number(window.location.search.split("=")[1]); 
-        cart.push({ id: idProduct, quantity: counter.value });
-        localStorage.setItem("cart", JSON.stringify(cart));
-
-    
-        let quantity = cart.reduce((acumulado, actual) => acumulado + actual.quantity, 0);
-        localStorage.setItem("quantity", quantity);
-        const quantityTag = document.querySelector("#quantity");
-    
+    const quantityTag = document.querySelector("#quantity");
+    if (quantityTag) {
         quantityTag.innerText = quantity;
     }
+
+    counter.value = "1";
+
+    alert("Producto agregado al carrito.");
+
+    //bibliotecas
+
+    Toastify({
+        text: "Agregaste producto/s al carrito de compras",
+        style: {
+            background: "#DB5079",
+        },
+    }).showToast();
+
+    Swal.fire({
+        text: "Estás segura/o de que querés agregar el producto al carrito?",
+        confirmButtonText: "Si",
+        cancelButtonText: "Ay no sé! Tengo miedo",
+        showCancelButton: true,
+        showCloseButton: true,
+        confirmButtonColor: "#06f",
+        cancelButtonColor: "#DB5079",
+    }).then(result => {
+        if (result.isConfirmed) {
+            // Ejecutamos lo que queremos si nos dio ok!
+            add()
+        }
+    })
+}
