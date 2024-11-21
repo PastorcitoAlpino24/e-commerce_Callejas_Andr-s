@@ -108,9 +108,58 @@ BotonRomance.addEventListener("click", () => {
     mostrarProductos(filterRomance);
 });
 
-const myPromise = new Promise((resolve) => {
-    setTimeout(() => {
-        resolve("Data loaded")}, 3000)
+//promesa
+document.addEventListener("DOMContentLoaded", function() {
+    const myPromise = new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("Datos cargados");
+        }, 3000); 
+    });
+
+    myPromise
+        .then(result => {
+            console.log(result);
+
+            const loader = document.getElementById("loader");
+            const movieGrid = document.getElementById("movieGrid");
+
+            if (loader) {
+                loader.style.display = "none";
+            }
+            if (movieGrid) {
+                movieGrid.style.display = "grid";
+            }
+
+            movies.forEach(movie => {
+                const card = document.createElement("div");
+                card.classList.add("card");
+
+                const cardImg = document.createElement("img");
+                cardImg.classList.add("card-img-top");
+                cardImg.src = movie.img;
+
+                const cardBody = document.createElement("div");
+                cardBody.classList.add("card-body");
+
+                const cardTitle = document.createElement("h5");
+                cardTitle.classList.add("card-title");
+                cardTitle.textContent = movie.title;
+
+                const cardText = document.createElement("p");
+                cardText.classList.add("card-text");
+                cardText.textContent = movie.description;
+
+                cardBody.appendChild(cardTitle);
+                cardBody.appendChild(cardText);
+                card.appendChild(cardImg);
+                card.appendChild(cardBody);
+
+                movieGrid.appendChild(card);
+            });
+        })
+        .catch(error => {
+            console.error("Error en la carga de datos", error);
+        });
 });
 
 /*

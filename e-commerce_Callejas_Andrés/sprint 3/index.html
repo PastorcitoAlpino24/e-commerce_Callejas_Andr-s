@@ -11,12 +11,12 @@
 
 <body>
     
-    <header></header><br>
-
-    <h1 class="ecommerce"></h1> <br>
+    <header>
+        <h1>E-commerce de Películas</h1>
+    </header><br>
 
     <div class="botones">
-        <input type="text" id="BuscarInput">
+        <input type="text" id="BuscarInput" placeholder="Buscar películas">
         <button id="BotonBuscar">Buscar</button>
         <button id="BotonLimpiar">Limpiar</button>
         <button id="BotonTodos">Todos</button>
@@ -33,10 +33,17 @@
         <button id="BotonRomance">Romance</button>
     </div><br>
 
-    <section class="container">
+    <div id="loader" class="loader">
+        <div class="spinner-border text-warning" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
+    </div>
 
-    </section>
+    <section class="container" id="movieGrid" style="display: none;"></section>
 
+    <footer class="footerAll">
+        <p>Derechos reservados &copy; 2024</p>
+    </footer>
     <script src="./script.js"></script>
     <script src="./navbar.js"></script>
 

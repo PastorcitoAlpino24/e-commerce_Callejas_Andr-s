@@ -14,15 +14,15 @@
 const elemento = window.location.search.split("=")[1];
 
 const data = [
-    { "id": 1, "title": "Gate of Flesh (Nikutai no mon)", "detail": "Phasellus sit amet erat. Nulla tempus.", "img": "http://dummyimage.com/165x100.png/dddddd/000000", "price": 6, "stock": 37 },
-    { "id": 2, "title": "Robin Hood", "detail": "Nullam sit amet turpis elementum ligula vehicula consequat.", "img": "http://dummyimage.com/221x100.png/cc0000/ffffff", "price": 95, "stock": 50 },
-    { "id": 3, "title": "Streaks, The (Pregi)", "detail": "Fusce consequat. Nulla nisl. Nunc nisl.", "img": "http://dummyimage.com/244x100.png/ff4444/ffffff", "price": 7, "stock": 41 },
-    { "id": 4, "title": "Sea Hawk, The", "detail": "In quis justo. Maecenas rhoncus aliquam lacus.", "img": "http://dummyimage.com/120x100.png/dddddd/000000", "price": 33, "stock": 22 },
-    { "id": 5, "title": "Four Sided Triangle", "detail": "Duis bibendum, felis sed interdum venenatis.", "img": "http://dummyimage.com/195x100.png/dddddd/000000", "price": 26, "stock": 86 },
-    { "id": 6, "title": "Fantastic Night, The (Nuit fantastique, La)", "detail": "Duis aliquam convallis nunc.", "img": "http://dummyimage.com/102x100.png/ff4444/ffffff", "price": 14, "stock": 54 },
-    { "id": 7, "title": "Beau Brummel", "detail": "Fusce posuere felis sed lacus.", "img": "http://dummyimage.com/150x100.png/ff4444/ffffff", "price": 56, "stock": 63 },
-    { "id": 8, "title": "Acacia", "detail": "Phasellus sit amet erat.", "img": "http://dummyimage.com/240x100.png/5fa2dd/ffffff", "price": 33, "stock": 32 },
-    { "id": 9, "title": "Winchester '73", "detail": "Proin eu mi. Nulla ac enim.", "img": "http://dummyimage.com/242x100.png/5fa2dd/ffffff", "price": 36, "stock": 89 }
+    {"id":1,"title":"Myth of Fingerprints, The","detail":"Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\n\nMorbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.","img":"http://dummyimage.com/184x100.png/ff4444/ffffff","price":84,"stock":53,"genres":"Comedy|Drama"},
+    {"id":2,"title":"Malibu's Most Wanted","detail":"Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.","img":"http://dummyimage.com/148x100.png/5fa2dd/ffffff","price":78,"stock":13,"genres":"Comedy|Crime"},
+    {"id":3,"title":"Logan's Run","detail":"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\n\nPhasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.","img":"http://dummyimage.com/154x100.png/cc0000/ffffff","price":23,"stock":75,"genres":"Action|Adventure|Sci-Fi"},
+    {"id":4,"title":"Twist","detail":"Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.","img":"http://dummyimage.com/115x100.png/5fa2dd/ffffff","price":32,"stock":42,"genres":"Drama"},
+    {"id":5,"title":"Storm Over Asia (Potomok Chingis-Khana)","detail":"Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.","img":"http://dummyimage.com/222x100.png/ff4444/ffffff","price":47,"stock":52,"genres":"Drama|War"},
+    {"id":6,"title":"Can't Buy Me Love","detail":"Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.","img":"http://dummyimage.com/245x100.png/5fa2dd/ffffff","price":60,"stock":52,"genres":"Comedy|Romance"},
+    {"id":7,"title":"It Should Happen to You","detail":"Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.","img":"http://dummyimage.com/118x100.png/cc0000/ffffff","price":58,"stock":21,"genres":"Comedy|Romance"},
+    {"id":8,"title":"Cinematographer Style","detail":"Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.\n\nNam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.","img":"http://dummyimage.com/219x100.png/dddddd/000000","price":87,"stock":97,"genres":"Documentary"},
+    {"id":9,"title":"Different from You and Me (Anders als du und ich) ","detail":"Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\n\nMorbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.","img":"http://dummyimage.com/237x100.png/ff4444/ffffff","price":3,"stock":60,"genres":"Drama"}
 ];
 
 const productoFiltrado = data.find(producto => producto.id == elemento);
@@ -78,74 +78,65 @@ function decreaseItem() {
 }
 
 function addItems() {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const idProduct = Number(window.location.search.split("=")[1]);
-    const product = data.find(item => item.id === idProduct);
-    const existItemEnCart = cart.some(item => item.product.id === idProduct);
+    function add() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    if (existItemEnCart) {
-        cart = cart.map(item => {
-            if (item.product.id === idProduct) {
-                const newQuantity = item.quantity + Number(counter.value);
+        const idProduct = Number(window.location.search.split("=")[1]); 
 
-                if (newQuantity > product.stock) {
-                    alert("No puedes agregar más de lo disponible en el stock.");
+        const product = data.find(item => item.id === idProduct); 
+
+        if (!product) {
+            alert("Producto no encontrado");
+            return;
+        }
+
+        const existingIdProduct = cart.some(item => item.product.id === idProduct); 
+
+        if (existingIdProduct) {
+            cart = cart.map(item => {
+                if (item.product.id === idProduct) {
+                    return {
+                        ...item,
+                        quantity: item.quantity + Number(counter.value),
+                    };
+                } else {
                     return item;
                 }
-
-                return { ...item, quantity: newQuantity };
-            } else {
-                return item;
-            }
-        });
-    } else {
-        const quantityToAdd = Number(counter.value);
-
-        if (quantityToAdd > product.stock) {
-            alert("No puedes agregar más de lo disponible en el stock.");
-        } else {
-            cart.push({
-                product: product,
-                quantity: quantityToAdd
             });
+        } else {
+            cart.push({ product: product, quantity: Number(counter.value) });
+        }
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        let totalQuantity = cart.reduce((acumulado, actual) => acumulado + actual.quantity, 0);
+        localStorage.setItem("quantity", totalQuantity);
+
+        const quantityTag = document.querySelector("#quantity");
+        if (quantityTag) {
+            quantityTag.innerText = totalQuantity; 
         }
     }
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-    let quantity = cart.reduce((acumulado, actual) => acumulado + actual.quantity, 0);
-    localStorage.setItem("quantity", quantity);
-
-    const quantityTag = document.querySelector("#quantity");
-    if (quantityTag) {
-        quantityTag.innerText = quantity;
-    }
-
-    counter.value = "1";
-
-    alert("Producto agregado al carrito.");
-
-    //bibliotecas
-
-    Toastify({
-        text: "Agregaste producto/s al carrito de compras",
-        style: {
-            background: "#DB5079",
-        },
-    }).showToast();
 
     Swal.fire({
-        text: "Estás segura/o de que querés agregar el producto al carrito?",
-        confirmButtonText: "Si",
-        cancelButtonText: "Ay no sé! Tengo miedo",
+        title: "¿Estás seguro?",
+        text: "¡Esto agregará productos al carrito!",
+        icon: "warning",
         showCancelButton: true,
-        showCloseButton: true,
-        confirmButtonColor: "#06f",
-        cancelButtonColor: "#DB5079",
-    }).then(result => {
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, agregar!",
+    }).then((result) => {
         if (result.isConfirmed) {
-            // Ejecutamos lo que queremos si nos dio ok!
-            add()
+            add();
+            Toastify({
+                avatar: "https://clipart-library.com/images_k/success-transparent/success-transparent-3.png",
+                text: "¡Producto/s agregado/s al carrito!",
+                style: {
+                    background: "#3cb869",
+                    padding: "15px",
+                },
+            }).showToast();
         }
-    })
+    });
 }

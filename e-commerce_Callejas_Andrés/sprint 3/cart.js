@@ -7,7 +7,7 @@ function getCart(cards) {
             <div class="card-body">
                 <div class="d-flex align-items-start">
                     <div class="me-4">
-                        <img src="${card.product.img}" class="img-fluid rounded-start" alt="${card.product.title}">
+                        <img src="${urlCars}${card.product.id}.jpg" class="img-fluid rounded-start" alt="${card.product.title}">
                     </div>
                     <div class="flex-grow-1 overflow-hidden">
                         <h5 class="text-truncate font-size-18">${card.product.title}</h5>
