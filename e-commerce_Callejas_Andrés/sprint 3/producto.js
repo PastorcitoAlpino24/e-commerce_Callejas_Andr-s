@@ -41,7 +41,7 @@ if (productoFiltrado) {
     ${localStorage.getItem("email")
             ? `<div class="input-group">
                 <button class="btn btn-danger" type="button" onclick="increaseItem()">+</button>
-                <input type="number" class="form-control" value="0">
+                <input type="number" class="form-control" value="1">
                 <button class="btn btn-danger" type="button" onclick="decreaseItem()">-</button>
                 <a href="#" class="btn btn-primary col-12" onclick="addItems()">Comprar</a>
            </div>`
@@ -70,7 +70,7 @@ function increaseItem() {
 
 
 function decreaseItem() {
-    if (Number(counter.value) > 0) {
+    if (Number(counter.value) > 1) { // La cantidad mínima ahora es 1
         counter.value = Number(counter.value) - 1;
     } else {
         alert("La cantidad mínima es 1.");
@@ -79,32 +79,40 @@ function decreaseItem() {
 
 function addItems() {
     function add() {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const counter = document.querySelector("input");
+        const cantidadSeleccionada = Number(counter.value);
 
-        const idProduct = Number(window.location.search.split("=")[1]); 
-
-        const product = data.find(item => item.id === idProduct); 
-
-        if (!product) {
-            alert("Producto no encontrado");
+        if (cantidadSeleccionada < 1) {
+            alert("Debes agregar al menos 1 producto.");
             return;
         }
 
-        const existingIdProduct = cart.some(item => item.product.id === idProduct); 
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const idProduct = Number(window.location.search.split("=")[1]);
+        console.log("ID del producto obtenido:", idProduct);
+
+        const product = data.find(item => item.id === idProduct);
+        if (!product) {
+            alert("El producto no existe en los datos cargados.");
+            console.error(`Producto con ID ${idProduct} no encontrado en los datos.`);
+            return;
+        }
+
+        const existingIdProduct = cart.some(item => item.product.id === idProduct);
 
         if (existingIdProduct) {
             cart = cart.map(item => {
                 if (item.product.id === idProduct) {
                     return {
                         ...item,
-                        quantity: item.quantity + Number(counter.value),
+                        quantity: item.quantity + cantidadSeleccionada,
                     };
                 } else {
                     return item;
                 }
             });
         } else {
-            cart.push({ product: product, quantity: Number(counter.value) });
+            cart.push({ product: product, quantity: cantidadSeleccionada });
         }
 
         localStorage.setItem("cart", JSON.stringify(cart));
@@ -114,7 +122,7 @@ function addItems() {
 
         const quantityTag = document.querySelector("#quantity");
         if (quantityTag) {
-            quantityTag.innerText = totalQuantity; 
+            quantityTag.innerText = totalQuantity;
         }
     }
 

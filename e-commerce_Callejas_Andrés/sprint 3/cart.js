@@ -40,42 +40,60 @@ function getCart(cards) {
 
 getCart(JSON.parse(localStorage.getItem("cart")));
 
-function total(cards) {
+function total(cards){
     let cartTotal = document.querySelector("#cart-total");
 
-    let total = cards.reduce(
-        (acumulado, actual) => acumulado + actual.product.price * actual.quantity,
-        0
-    );
-
+    let total =
+        cards.length > 0
+            ? cards.reduce(
+                (acumulado, actual) => acumulado + actual.product.price * actual.quantity, 0
+            )
+        : 0;
     cartTotal.innerText = "$" + total;
 }
 
 total(JSON.parse(localStorage.getItem("cart")));
 
-function removeItem(id) {
-    const cards = JSON.parse(localStorage.getItem("cart"));
-
-    const newCards = cards.filter(card => card.product.id !== id);
-
-    localStorage.setItem("cart", JSON.stringify(newCards));
-
-    getCart(newCards);
-
-    total(newCards);
-
-    let quantity = newCards.reduce((acumulado, actual) => acumulado + actual.quantity, 0);
-    localStorage.setItem("quantity", quantity);
+function clearCart(){
     const quantityTag = document.querySelector("#quantity");
-    quantityTag.innerText = quantity;
-}
-
-function clearCart() {
-    let quantityTag = document.querySelector("#quantity");
+    localStorage.setItem("quantity", 0);
     quantityTag.innerText = "0";
     localStorage.setItem("cart", JSON.stringify([]));
     getCart([]);
-    total(0);
+    total([]);
 }
 
-isAuthRedirectHome();
+function checkout(){
+    const recurso = {
+        user: localStorage.getItem("email"),
+        items: JSON.parse(localStorage.getItem("cart")),
+    };
+
+    fetch("https://67367b22aafa2ef22230a09c.mockapi.io/orders/cart", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(recurso),
+        })
+            .then(response => {
+                if (response.status !== 201) {
+                    console.error("Error:", error);
+                    Swal.fire({
+                        text: "Oops... There was a problem. Please try again later.",
+                        confirmButtonText: "Ok",
+                        confirmButtonColor: "#333",
+                    });
+                } else {
+                    return response.json()
+                }
+            })
+            .then(order => {
+                Swal.fire({
+                    text: `Thank you ${order.user} for your purchase. We have registered your order #${order.id}`,
+                    confirmButtonText: "Ok",
+                    confirmButtonColor: "#333",
+                });
+                clearCart();
+            });
+};
